@@ -1,5 +1,7 @@
 const myLibrary = ['book1', 'book2'];
 
+const library = document.getElementById('library');
+
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -14,6 +16,10 @@ function addBookToLibrary(title, author, pages, read) {
             break;
         }
     }
+}
+
+function clearEmptyLibrary() {
+    library.innerHTML = '';
 }
 
 addBookToLibrary('gameofthrones', 'hksomething', 143, true);

@@ -16,10 +16,49 @@
             <h1 class="title">myLibrary</h1>
         </div>
 
-        <div class="library">
+        <div class="library" id="library">
             <div class="emptyLibrary">
                 <h1>Your library is empty!</h1>
                 <p>Click the add book button below to start your collection.</p>
+            </div>
+
+            <div class="addBookForm">
+                <form action="#" id="addBookForm">
+                    <p class="formheader">Add Book to Library</p>
+                    <div class="fields">
+                        <div class="pairs">
+                            <label for="title" class="title">Title</label>
+                            <input
+                                type="text"
+                                class="title"
+                                placeholder="title"
+                                name="title"
+                            />
+                        </div>
+                        <div class="pairs">
+                            <label for="author" class="author">Author</label>
+                            <input
+                                type="text"
+                                class="author"
+                                placeholder="author"
+                                name="author"
+                            />
+                        </div>
+                        <div class="pairs">
+                            <label for="pages" class="pages">Pages</label>
+                            <input
+                                type="number"
+                                class="pages"
+                                name="pages"
+                                placeholder="555"
+                            />
+                        </div>
+                        <div class="pairs">
+                            <label for="read" class="read">Read</label>
+                            <input type="checkbox" class="reader" name="read" />
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 
