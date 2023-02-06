@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 :root {
-    --50: #f9fafb;
     --100: #f3f4f6;
     --200: #e5e7eb;
     --300: #d1d5db;
@@ -12,8 +11,11 @@
     --700: #374151;
     --800: #1f2937;
     --900: #111827;
+    --white: #f9fafb;
     --blue: #1992d4;
     --yellow: #f0b429;
+    --border-radius: 10px;
+    --shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.14);
 }
 
 * {
@@ -24,7 +26,6 @@
 
 body {
     height: 100vh;
-    width: 100vw;
     display: grid;
     grid-template-columns: 100vw;
     grid-template-rows: 15vh 1fr 10vh;
@@ -34,10 +35,12 @@ body {
         'footer';
 }
 
+/* Header */
+
 .header {
     grid-area: header;
     background-color: var(--blue);
-    color: var(--100);
+    color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,17 +49,19 @@ body {
 }
 
 .title {
-    font-size: 10vmin;
+    font-size: clamp(1.5rem, 10vmin, 3.5rem);
 }
 
 .book-icon {
     margin-top: -2vmin;
-    height: 10vmin;
+    height: clamp(0.1rem, 10vmin, 3.5rem);
 }
 
-.library {
+/* Library */
+
+.main {
     font-family: 'Roboto', sans-serif;
-    box-shadow: 0px 2px 4px var(--300) inset;
+    box-shadow: 0px 2px 4px 0px var(--300) inset;
     padding: 2rem;
 }
 
@@ -70,6 +75,63 @@ body {
     text-align: center;
 }
 
+/* Modal */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.2);
+    /* display: none; */
+}
+
+.addBookFormContainer {
+    z-index: 1;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    /* display: none; */
+}
+
+.addBookForm {
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+}
+
+.addBookFormFields {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    font-size: clamp(1.2rem, 3vmin, 3vmin);
+}
+
+.addBookFormPairs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75vh;
+}
+
+.addBookFormHeader {
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 6vmin;
+    font-weight: 700;
+}
+
+/* Footer */
+
 .footer {
     background-color: var(--blue);
     display: grid;
@@ -80,7 +142,7 @@ body {
 
 .addBookButton {
     color: var(--blue);
-    background-color: var(--100);
+    background-color: var(--white);
     border: none;
     font-size: 4vh;
     font-weight: bold;
@@ -92,5 +154,5 @@ body {
     height: 5.5vh;
     width: 5.5vh;
     border-radius: 50%;
-    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.14);
+    box-shadow: var(--shadow);
 }
