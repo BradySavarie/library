@@ -17,18 +17,23 @@
         </div>
 
         <div class="main" id="main">
-            <div class="emptyLibrary">
+            <div class="emptyLibrary" id="emptyLibrary">
                 <h1>Your library is empty!</h1>
                 <p>Click the add book button below to start your collection.</p>
             </div>
         </div>
 
         <div class="footer">
-            <button class="addBookButton" type="submit">+</button>
+            <button class="addBookButton" type="submit" id="openFormButton">
+                +
+            </button>
         </div>
 
-        <div class="overlay"></div>
-        <div class="addBookFormContainer">
+        <div class="overlay" id="overlay"></div>
+        <div class="addBookFormContainer" id="addBookFormContainer">
+            <button class="closeFormButton" id="closeFormButton" type="submit">
+                &times
+            </button>
             <form action="#" id="addBookForm" class="addBookForm">
                 <p class="addBookFormHeader">Add Book to Library</p>
                 <div class="addBookFormFields">
@@ -55,9 +60,9 @@
                     />
                     <div class="readInput">
                         <p>Have you read this book?</p>
-                        <input type="checkbox" id="switch" /><label for="switch"
-                            >Toggle</label
-                        >
+                        <input type="checkbox" id="switch" /><label
+                            for="switch"
+                        ></label>
                     </div>
                     <button type="submit" class="submitForm">Add</button>
                 </div>
