@@ -1,0 +1,6 @@
+On window load the emptyLibrary div is displayed
+When addBook button is clicked the toggleForm function removes display: none from addBookForm
+if user clicks exit button the toggleForm function adds display: none to addBookForm
+if user submits info:
+    Set display: none to emptyLibrary div
+    runs addBookToLibrary function with given information, and runs displayLibrary function.

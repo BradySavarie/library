@@ -1,9 +1,32 @@
 const myLibrary = ['book1', 'book2'];
 
-const addBookForm = document.getElementById('addBookFormContainer');
-const overlay = document.getElementById('overlay');
+// Element Selectors //
+
 const openFormButton = document.getElementById('openFormButton');
 const closeFormButton = document.getElementById('closeFormButton');
+const overlay = document.getElementById('overlay');
+const addBookFormContainer = document.getElementById('addBookFormContainer');
+const addBookForm = document.getElementById('addBookForm');
+
+// Functions //
+
+function openAddBookForm() {
+    addBookFormContainer.style.transform = 'translate(-50%, -50%) scale(1)';
+    overlay.style.display = 'block';
+}
+
+function closeAddBookForm() {
+    addBookFormContainer.style.transform = 'translate(-50%, -50%) scale(0)';
+    overlay.style.display = 'none';
+}
+
+function getFormData(form) {
+    const formData = new FormData(form);
+
+    for (const pair of formData.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+    }
+}
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -21,19 +44,7 @@ function addBookToLibrary(title, author, pages, read) {
     }
 }
 
-function openAddBookForm() {
-    addBookForm.style.transform = 'translate(-50%, -50%) scale(1)';
-    overlay.style.display = 'block';
-}
-
-function closeAddBookForm() {
-    addBookForm.style.transform = 'translate(-50%, -50%) scale(0)';
-    overlay.style.display = 'none';
-}
-
-addBookToLibrary('gameofthrones', 'hksomething', 143, true);
-
-console.log(myLibrary[2]);
+// Event Handlers //
 
 openFormButton.addEventListener('click', () => {
     openAddBookForm();
@@ -42,3 +53,21 @@ openFormButton.addEventListener('click', () => {
 closeFormButton.addEventListener('click', () => {
     closeAddBookForm();
 });
+
+overlay.addEventListener('click', () => {
+    closeAddBookForm();
+});
+
+addBookForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (document.getElementById('isRead').checked) {
+        document.getElementById('isNotRead').disabled = true;
+    }
+    getFormData(e.target);
+});
+
+// Test Scripts //
+
+addBookToLibrary('gameofthrones', 'hksomething', 143, true);
+
+console.log(myLibrary[2]);

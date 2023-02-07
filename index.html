@@ -34,7 +34,7 @@
             <button class="closeFormButton" id="closeFormButton" type="submit">
                 &times
             </button>
-            <form action="#" id="addBookForm" class="addBookForm">
+            <form id="addBookForm" class="addBookForm">
                 <p class="addBookFormHeader">Add Book to Library</p>
                 <div class="addBookFormFields">
                     <input
@@ -49,6 +49,7 @@
                         type="text"
                         name="author"
                         placeholder="Author"
+                        autocomplete="off"
                         required
                     />
                     <input
@@ -60,11 +61,20 @@
                     />
                     <div class="readInput">
                         <p>Have you read this book?</p>
-                        <input type="checkbox" id="switch" /><label
-                            for="switch"
-                        ></label>
+                        <input
+                            type="checkbox"
+                            id="isRead"
+                            name="read"
+                            value="true"
+                        /><label for="isRead"></label>
+                        <input
+                            type="hidden"
+                            id="isNotRead"
+                            name="read"
+                            value="false"
+                        />
                     </div>
-                    <button type="submit" class="submitForm">Add</button>
+                    <button type="submit">Add</button>
                 </div>
             </form>
         </div>
