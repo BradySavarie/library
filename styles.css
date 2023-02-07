@@ -20,6 +20,7 @@ body {
         'header'
         'library'
         'footer';
+    max-height: 100vh;
 }
 
 /* Header */
@@ -50,16 +51,39 @@ body {
     font-family: var(--ff-body);
     box-shadow: 0px 2px 4px 0px var(--grey) inset;
     padding: 2rem;
+    overflow-y: scroll;
 }
 
 .emptyLibrary {
     height: 100%;
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
     text-align: center;
+    display: none;
+}
+
+.booksGrid {
+    padding: 1rem;
+    outline: 1px solid black;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 1rem;
+    min-height: 100%;
+}
+
+.card {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    outline: 1px solid black;
+    min-height: calc(50% - 1rem);
+    background-color: var(--white);
+    font-family: var(--ff-body);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 }
 
 /* Modal */
