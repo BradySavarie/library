@@ -1,6 +1,13 @@
-On window load the emptyLibrary div is displayed
-When addBook button is clicked the toggleForm function removes display: none from addBookForm
-if user clicks exit button the toggleForm function adds display: none to addBookForm
-if user submits info:
-    Set display: none to emptyLibrary div
-    runs addBookToLibrary function with given information, and runs displayLibrary function.
+Book is added to myLibrary addBookToLibrary
+display: none to empty library div
+closeForm function is run
+display: block to toggle book grid div
+create a generateCard function that takes info from the recently added book and creates a card that has consistent css styling applied
+create addToBookGrid function that appends the card to the grid and displays it
+create a removeBookFromGrid function
+create a toggle read button within card that changes the read status within the book object
+
+optional features:
+    total books count
+    total books read
+    total books not read

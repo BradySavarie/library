@@ -204,7 +204,7 @@ label:active:after {
     grid-area: footer;
 }
 
-.addBookButton {
+.openFormButton {
     color: var(--blue);
     background-color: var(--white);
     border: none;

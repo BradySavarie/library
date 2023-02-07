@@ -1,4 +1,4 @@
-const myLibrary = ['book1', 'book2'];
+const myLibrary = [];
 
 // Element Selectors //
 
@@ -7,8 +7,16 @@ const closeFormButton = document.getElementById('closeFormButton');
 const overlay = document.getElementById('overlay');
 const addBookFormContainer = document.getElementById('addBookFormContainer');
 const addBookForm = document.getElementById('addBookForm');
+const emptyLibrary = document.getElementById('emptyLibrary');
 
 // Functions //
+
+function Book(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+}
 
 function openAddBookForm() {
     addBookFormContainer.style.transform = 'translate(-50%, -50%) scale(1)';
@@ -20,21 +28,6 @@ function closeAddBookForm() {
     overlay.style.display = 'none';
 }
 
-function getFormData(form) {
-    const formData = new FormData(form);
-
-    for (const pair of formData.entries()) {
-        console.log(`${pair[0]}: ${pair[1]}`);
-    }
-}
-
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
-
 function addBookToLibrary(title, author, pages, read) {
     for (let i = 0; i <= myLibrary.length; i++) {
         if (myLibrary[i] === undefined) {
@@ -42,6 +35,21 @@ function addBookToLibrary(title, author, pages, read) {
             break;
         }
     }
+}
+
+function getFormData(form) {
+    const formData = new FormData(form);
+    const [titlePair, authorPair, pagesPair, readPair] = formData.entries();
+    const values = [titlePair[1], authorPair[1], pagesPair[1], readPair[1]];
+    return values;
+}
+
+function toggleEmptyLibrary() {
+    if (!(myLibrary[0] === undefined)) {
+        emptyLibrary.style.display = 'none';
+        return;
+    }
+    emptyLibrary.style.display = 'flex';
 }
 
 // Event Handlers //
@@ -63,11 +71,11 @@ addBookForm.addEventListener('submit', (e) => {
     if (document.getElementById('isRead').checked) {
         document.getElementById('isNotRead').disabled = true;
     }
-    getFormData(e.target);
+    const [title, author, pages, read] = getFormData(e.target);
+    addBookToLibrary(title, author, pages, read);
+    toggleEmptyLibrary();
+    closeAddBookForm();
+    console.log(myLibrary);
 });
 
 // Test Scripts //
-
-addBookToLibrary('gameofthrones', 'hksomething', 143, true);
-
-console.log(myLibrary[2]);
