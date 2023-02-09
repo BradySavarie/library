@@ -6,6 +6,7 @@
     --grey: #d1d5db;
     --blue: #1992d4;
     --yellow: #f0b429;
+    --red: #d71414;
     --ff-body: 'Roboto', sans-serif;
     --ff-heading: 'Noto Naskh Arabic', serif;
     --border-radius: 10px;
@@ -56,34 +57,65 @@ body {
 
 .emptyLibrary {
     height: 100%;
-    /* display: flex; */
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
     text-align: center;
-    display: none;
 }
 
 .booksGrid {
     padding: 1rem;
-    outline: 1px solid black;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
     gap: 1rem;
     min-height: 100%;
+    transform: scale(0);
+    transition: 0.3s;
 }
 
 .card {
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    outline: 1px solid black;
+    position: relative;
+    padding: 1rem;
+    outline: 2px solid black;
     min-height: calc(50% - 1rem);
     background-color: var(--white);
     font-family: var(--ff-body);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-align: center;
+}
+
+.card h1 {
+    font-size: clamp(2.15rem, 3vw, 7vw);
+    line-height: 1;
+}
+
+.removeBook {
+    color: var(--white);
+    background-color: var(--red);
+    border: none;
+    font-size: 4vmin;
+    font-weight: bold;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    line-height: 5vmin;
+    height: 5.5vmin;
+    width: 5.5vmin;
+    border-radius: 50%;
+    box-shadow: var(--shadow);
+    transform: scale(0.8);
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
 }
 
 /* Modal */
