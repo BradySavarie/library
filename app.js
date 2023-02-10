@@ -1,6 +1,6 @@
 const myLibrary = [];
 
-// Element Selectors //
+// Global Element Selectors //
 
 const openFormButton = document.getElementById('openFormButton');
 const closeFormButton = document.getElementById('closeFormButton');
@@ -38,6 +38,11 @@ function addBookToLibrary(title, author, pages, read) {
     }
 }
 
+function removeBookFromLibrary(card) {
+    const index = card.dataset;
+    myLibrary.splice(index, 1);
+}
+
 function getFormData(form) {
     const formData = new FormData(form);
     const [titlePair, authorPair, pagesPair, readPair] = formData.entries();
@@ -62,9 +67,9 @@ function toggleBooksGrid() {
 }
 
 function addBookToGrid() {
-    // select recently added book from last index of myLibrary array
+    // get book
     const book = myLibrary[myLibrary.length - 1];
-    // create card DOM elements and give them a data-attribute matching myLibrary index number of book
+    // create elements
     const card = document.createElement('div');
     const title = document.createElement('h1');
     const author = document.createElement('p');
@@ -77,17 +82,17 @@ function addBookToGrid() {
     const pagesContent = document.createTextNode(`Pages: ${book.pages}`);
     const readTextContent = document.createTextNode('Read');
     const removeContent = document.createTextNode('-');
-
+    // add attributes to elements
     card.classList.add('card');
     card.dataset.book = `${myLibrary.length - 1}`;
     title.classList.add('bookTitle');
     author.classList.add('bookAuthor');
     pages.classList.add('pages');
-    read.classList.add('readInput');
+    read.classList.add('read');
     read.setAttribute('id', `isReadCard${myLibrary.length}`);
     remove.classList.add('removeBook');
     remove.setAttribute('id', `removeBook${myLibrary.length}`);
-
+    // append book
     booksGrid.appendChild(card);
     card.appendChild(title);
     card.appendChild(author);
@@ -105,14 +110,27 @@ function removeBookFromGrid(card) {
     booksGrid.removeChild(card);
 }
 
-function removeBookFromLibrary(card) {
-    const index = card.dataset;
-    myLibrary.splice(index, 1);
+function initializeRead(readStatus) {
+    const card = document.getElementById(`isReadCard${myLibrary.length}`);
+    if (readStatus === 'true') {
+        card.textContent = 'Read';
+        card.style.background = '#1992d4';
+    } else if (readStatus === 'false') {
+        card.textContent = ' Not Read';
+        card.style.background = '#d71414';
+    }
 }
 
-function toggleRead(readButton) {
+function toggleRead(readButton, card) {
+    const index = card.dataset;
     if (readButton.textContent === 'Read') {
+        myLibrary[index.book].read = false;
         readButton.textContent = 'Not Read';
+        readButton.style.background = '#d71414';
+    } else {
+        myLibrary[index.book].read = true;
+        readButton.textContent = 'Read';
+        readButton.style.background = '#1992d4';
     }
 }
 
@@ -141,6 +159,7 @@ addBookForm.addEventListener('submit', (e) => {
     closeAddBookForm();
     toggleBooksGrid();
     addBookToGrid();
+    initializeRead(read);
 });
 
 booksGrid.addEventListener('click', (e) => {
@@ -150,10 +169,8 @@ booksGrid.addEventListener('click', (e) => {
             removeBookFromLibrary(e.target.parentNode);
             toggleBooksGrid();
             toggleEmptyLibrary();
-        } else if (e.target.className === 'readInput') {
-            toggleRead(e.target);
+        } else if (e.target.className === 'read') {
+            toggleRead(e.target, e.target.parentNode);
         }
     }
 });
-
-// Test Scripts //
