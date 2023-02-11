@@ -165,9 +165,6 @@ overlay.addEventListener('click', () => {
 
 addBookForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    if (document.getElementById('isRead').checked) {
-        document.getElementById('isNotRead').disabled = true;
-    }
     const [title, author, pages, read] = getFormData(e.target);
     addBookToLibrary(title, author, pages, read);
     toggleEmptyLibrary();

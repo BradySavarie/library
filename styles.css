@@ -122,6 +122,7 @@ body {
     border: none;
     border-radius: var(--border-radius);
     color: var(--white);
+    background-color: var(--blue);
     padding: 1rem 2rem;
     box-shadow: var(--shadow);
     width: max-content;
