@@ -39,7 +39,7 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 function removeBookFromLibrary(card) {
-    const index = card.dataset;
+    const index = card.dataset.book;
     myLibrary.splice(index, 1);
 }
 
@@ -116,21 +116,32 @@ function initializeRead(readStatus) {
         card.textContent = 'Read';
         card.style.background = '#1992d4';
     } else if (readStatus === 'false') {
-        card.textContent = ' Not Read';
+        card.textContent = 'Not Read';
         card.style.background = '#d71414';
     }
 }
 
 function toggleRead(readButton, card) {
-    const index = card.dataset;
+    const index = card.dataset.book;
     if (readButton.textContent === 'Read') {
-        myLibrary[index.book].read = false;
+        myLibrary[index].read = false;
         readButton.textContent = 'Not Read';
         readButton.style.background = '#d71414';
-    } else {
-        myLibrary[index.book].read = true;
+    } else if (readButton.textContent === 'Not Read') {
+        myLibrary[index].read = true;
         readButton.textContent = 'Read';
         readButton.style.background = '#1992d4';
+    }
+}
+
+function updateDataValues(card) {
+    const dataValue = card.dataset.book;
+    const cards = Array.from(document.getElementsByClassName('card'));
+
+    for (let i = 0; i < cards.length; i++) {
+        if (cards[i].dataset.book >= dataValue) {
+            cards[i].dataset.book--;
+        }
     }
 }
 
@@ -167,6 +178,7 @@ booksGrid.addEventListener('click', (e) => {
         if (e.target.className === 'removeBook') {
             removeBookFromGrid(e.target.parentNode);
             removeBookFromLibrary(e.target.parentNode);
+            updateDataValues(e.target.parentNode);
             toggleBooksGrid();
             toggleEmptyLibrary();
         } else if (e.target.className === 'read') {

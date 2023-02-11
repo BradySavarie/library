@@ -118,6 +118,18 @@ body {
     right: 0.5rem;
 }
 
+.read {
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--white);
+    padding: 1rem 2rem;
+    box-shadow: var(--shadow);
+    width: max-content;
+    padding: 0.25rem 0.75rem;
+    align-self: center;
+    cursor: pointer;
+}
+
 /* Modal */
 
 .overlay {
