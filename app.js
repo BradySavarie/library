@@ -29,6 +29,17 @@ function closeAddBookForm() {
     overlay.style.display = 'none';
 }
 
+function getFormData(form) {
+    const formData = new FormData(form);
+    const [titlePair, authorPair, pagesPair, readPair] = formData.entries();
+    const values = [titlePair[1], authorPair[1], pagesPair[1], readPair[1]];
+    return values;
+}
+
+function clearAddBookForm() {
+    addBookForm.reset();
+}
+
 function addBookToLibrary(title, author, pages, read) {
     for (let i = 0; i <= myLibrary.length; i++) {
         if (myLibrary[i] === undefined) {
@@ -38,24 +49,32 @@ function addBookToLibrary(title, author, pages, read) {
     }
 }
 
-function removeBookFromLibrary(card) {
-    const index = card.dataset.book;
-    myLibrary.splice(index, 1);
-}
-
-function getFormData(form) {
-    const formData = new FormData(form);
-    const [titlePair, authorPair, pagesPair, readPair] = formData.entries();
-    const values = [titlePair[1], authorPair[1], pagesPair[1], readPair[1]];
-    return values;
-}
-
 function toggleEmptyLibrary() {
     if (!(myLibrary[0] === undefined)) {
         emptyLibrary.style.display = 'none';
         return;
     }
     emptyLibrary.style.display = 'flex';
+}
+
+function initializeRead(readStatus) {
+    const card = document.getElementById(`isReadCard${myLibrary.length}`);
+    if (readStatus === 'true') {
+        card.textContent = 'Read';
+        card.style.background = '#1992d4';
+    } else if (readStatus === 'false') {
+        card.textContent = 'Not Read';
+        card.style.background = '#d71414';
+    }
+}
+
+function removeBookFromGrid(card) {
+    booksGrid.removeChild(card);
+}
+
+function removeBookFromLibrary(card) {
+    const index = card.dataset.book;
+    myLibrary.splice(index, 1);
 }
 
 function toggleBooksGrid() {
@@ -106,18 +125,14 @@ function addBookToGrid() {
     remove.appendChild(removeContent);
 }
 
-function removeBookFromGrid(card) {
-    booksGrid.removeChild(card);
-}
+function updateDataValues(card) {
+    const dataValue = card.dataset.book;
+    const cards = Array.from(document.getElementsByClassName('card'));
 
-function initializeRead(readStatus) {
-    const card = document.getElementById(`isReadCard${myLibrary.length}`);
-    if (readStatus === 'true') {
-        card.textContent = 'Read';
-        card.style.background = '#1992d4';
-    } else if (readStatus === 'false') {
-        card.textContent = 'Not Read';
-        card.style.background = '#d71414';
+    for (let i = 0; i < cards.length; i++) {
+        if (cards[i].dataset.book >= dataValue) {
+            cards[i].dataset.book--;
+        }
     }
 }
 
@@ -131,17 +146,6 @@ function toggleRead(readButton, card) {
         myLibrary[index].read = true;
         readButton.textContent = 'Read';
         readButton.style.background = '#1992d4';
-    }
-}
-
-function updateDataValues(card) {
-    const dataValue = card.dataset.book;
-    const cards = Array.from(document.getElementsByClassName('card'));
-
-    for (let i = 0; i < cards.length; i++) {
-        if (cards[i].dataset.book >= dataValue) {
-            cards[i].dataset.book--;
-        }
     }
 }
 
@@ -168,6 +172,7 @@ addBookForm.addEventListener('submit', (e) => {
     addBookToLibrary(title, author, pages, read);
     toggleEmptyLibrary();
     closeAddBookForm();
+    clearAddBookForm();
     toggleBooksGrid();
     addBookToGrid();
     initializeRead(read);
