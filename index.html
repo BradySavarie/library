@@ -36,7 +36,7 @@
             <button class="closeFormButton" id="closeFormButton" type="submit">
                 &times
             </button>
-            <form id="addBookForm" class="addBookForm">
+            <form id="addBookForm" class="addBookForm" novalidate>
                 <p class="addBookFormHeader">Add Book to Library</p>
                 <div class="addBookFormFields">
                     <input
@@ -44,6 +44,7 @@
                         type="text"
                         name="title"
                         placeholder="Title"
+                        minlength="1"
                         required
                     />
                     <input
@@ -52,6 +53,7 @@
                         name="author"
                         placeholder="Author"
                         autocomplete="off"
+                        minlength="1"
                         required
                     />
                     <input

@@ -7,6 +7,7 @@ const closeFormButton = document.getElementById('closeFormButton');
 const overlay = document.getElementById('overlay');
 const addBookFormContainer = document.getElementById('addBookFormContainer');
 const addBookForm = document.getElementById('addBookForm');
+const titleInput = document.getElementById('title');
 const emptyLibrary = document.getElementById('emptyLibrary');
 const booksGrid = document.getElementById('booksGrid');
 
@@ -151,6 +152,15 @@ function toggleRead(readButton, card) {
     }
 }
 
+function validateForm() {
+    if (!titleInput.validity.valid) {
+        titleInput.setAttribute('placeholder', 'Min 1 character');
+        return false;
+    }
+    titleInput.classList.remove('error');
+    return true;
+}
+
 // Event Handlers //
 
 openFormButton.addEventListener('click', () => {
@@ -167,6 +177,7 @@ overlay.addEventListener('click', () => {
 
 addBookForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
     const [title, author, pages, read] = getFormData(e.target);
     addBookToLibrary(title, author, pages, read);
     toggleEmptyLibrary();
