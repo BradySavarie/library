@@ -1,6 +1,6 @@
 <h1>📖 myLibrary</h1>
 
-<h2>Track Your Book Collection Virtually!</h2>
+<h2>Track Your Book Collection Virtually</h2>
 
 <img width="1280" alt="Desktop Design" src="https://user-images.githubusercontent.com/106128212/218281081-38593a05-5032-45ec-b2ad-57086265f14d.png">
 
